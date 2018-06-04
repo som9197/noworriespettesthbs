@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Owner Survey</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<!---->
+
+<style>
+body {
+    padding-left: 30px;
+    background-color: lightpink;
+}
+</style>
+
+<!---->
+
+<body>
+    <br>
+    <div class="panel-body">
+
+        <form>
+
+            <div class="form-group">
+                <label for="user_firstname">
+                    <b>First and Last Name:</b>
+                </label>
+                <input type="text" class="form-control" id="one_q" placeholder="Enter answer" name="one_q">
+            </div>
+
+            <div class="form-group">
+                <label for="user_email">
+                    <b>Email:</b>
+                </label>
+                <input type="text" class="form-control" id="two_q" placeholder="Enter answer" name="two_q">
+            </div>
+
+            <p>
+                <b>City:</b>
+            </p>
+            <select id="three_q">
+                <option value="Chicago">Chicago</option>
+                <option value="NYC">New York City</option>
+                <option value="DC">Washington DC</option>
+                <option value="Boston">Boston</option>
+                <option value="Los_Angeles">Los Angeles</option>
+                <option value="San_Francisco">San Francisco</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Austin">Austin</option>
+                <option value="Dallas">Dallas</option>
+                <option value="Atlanta">Atlanta</option>
+            </select><br><br>
+
+            <form>
+                <b>Do you have a </b><br>
+                <input type="checkbox" name="dog" value="1">Dog &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="dog" value="0" checked style="display:none"> 
+
+                <input type="checkbox" name="cat" value="1">Cat &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="cat" value="0" checked style="display:none">
+
+                <input type="checkbox" name="bird" value="1">Bird &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="bird" value="0" checked style="display:none">
+
+                <input type="checkbox" name="snake" value="1">Snake &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" name="snake" value="0" checked style="display:none">
+            </form><br>
+
+            <div class="form-group">
+                <label for="user_moreinfo">
+                    <b>More information about my pet:</b>
+                </label>
+                <input type="text" class="form-control" id="eight_q" placeholder="Enter answer" name="eight_q">
+            </div>
+            <br><br><br>
+
+            <button type="button" class="btn btn-default" data-toggle="modal" id="submitnow">SUBMIT</button>
+
+        </form>
+
+    </div><br><br>
+
+    <br>
+    <footer class="footer">
+        <div class="container">
+            <p>
+                Dummy Footer
+            </p>
+        </div>
+    </footer>
+
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $("#one_q").val(""); $("#two_q").val(""); $("#three_q").val(""); $("#eight_q").val("");
+
+    $("#submitnow").on("click", function (event) {
+        event.preventDefault();
+
+        var ownerAnswers = {
+            fullname: $("#one_q").val().trim(),
+            place: $("#three_q").val().trim(),
+            emailaddress: $("#two_q").val().trim(),
+            hasDog: $("[name=dog]:checked").val().trim(),
+            hasCat: $("[name=cat]:checked").val().trim(),
+            hasBird: $("[name=bird]:checked").val().trim(),
+            hasSnake: $("[name=snake]:checked").val().trim(),
+            moreInformation: $("#eight_q").val().trim(),
+        };
+
+        $.post("/api/newownerinformation", ownerAnswers)
+           .then(function(data) {
+            console.log("Adding");
+           });
+
+        $("#one_q").val(""); $("#two_q").val(""); $("#three_q").val(""); $("#eight_q").val("");
+
+    });
+
+</script>

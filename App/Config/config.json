@@ -1,0 +1,27 @@
+{
+    "development": {
+      "username": "petapp",
+      "password": "noworries",
+      "database": "petSitter",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "dialect": "mysql"
+    },
+    "test": {
+      "username": "petapp",
+      "password": "noworries",
+      "database": "petSitter",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "petapp",
+      "password": "noworries",
+      "database": "petSitter",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "dialect": "mysql"
+    }
+  }
+  

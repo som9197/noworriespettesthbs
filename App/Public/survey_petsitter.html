@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Sitter Survey</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<!---->
+
+<style>
+
+body {
+    padding-left: 30px;
+    background-color: tan;
+}
+
+</style>
+
+<!---->
+
+<body>
+    <br>
+    <div class="panel-body">
+
+        <form>
+
+            <div class="form-group">
+                <label for="user_firstname">
+                    <b>First and Last Name:</b>
+                </label>
+                <input type="text" class="form-control" id="first_q" placeholder="Enter answer" name="first_q">
+            </div>
+
+            <div class="form-group">
+                <label for="user_email">
+                    <b>Email:</b>
+                </label>
+                <input type="text" class="form-control" id="second_q" placeholder="Enter answer" name="second_q">
+            </div>
+
+            <p>
+                <b>City:</b>
+            </p>
+            <select id="third_q">
+                <option value="Chicago">Chicago</option>
+                <option value="NYC">New York City</option>
+                <option value="DC">Washington DC</option>
+                <option value="Boston">Boston</option>
+                <option value="Los_Angeles">Los Angeles</option>
+                <option value="San_Francisco">San Francisco</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Austin">Austin</option>
+                <option value="Dallas">Dallas</option>
+                <option value="Atlanta">Atlanta</option>
+            </select><br><br>
+
+            <p>
+                <b>Experience (Years):</b>
+            </p>
+            <select id="fourth_q">
+                <option value="0">>1</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5+</option>
+            </select><br><br>
+
+            <!-- <p>
+                <b>Hourly Rate (Range):</b>
+            </p>
+            <select id="sixth_q">
+                <option value="1">$12.00 - $13.99</option>
+                <option value="2">$14.00 - $15.99</option>
+                <option value="3">$16.00 - $17.99</option>
+                <option value="4">$18.00 - $19.99</option>
+                <option value="5">$20.00 - $21.99</option>
+                <option value="6">$22.00 - $23.99</option>
+                <option value="7">$24.00 - $25.99</option>
+                <option value="8">$26.00 - $27.99</option>                
+                <option value="9">$28.00 - $29.99</option>
+                <option value="10">$30+</option>
+            </select><br><br> -->
+
+            <form>
+                    <b>Would you sit a</b><br>
+                    <input type="checkbox" name="dog" value="1">Dog &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="dog" value="0" checked style="display:none"> 
+    
+                    <input type="checkbox" name="cat" value="1">Cat &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="cat" value="0" checked style="display:none">
+    
+                    <input type="checkbox" name="bird" value="1">Bird &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="bird" value="0" checked style="display:none">
+    
+                    <input type="checkbox" name="snake" value="1">Snake &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="snake" value="0" checked style="display:none">
+                </form><br>
+
+            <div class="form-group">
+                <label for="user_moreinfo">
+                    <b>More about Me!</b>
+                </label>
+                <input type="text" class="form-control" id="tenth_q" placeholder="Enter answer" name="tenth_q">
+            </div>
+            <br><br><br>
+
+            <button type="button" class="btn btn-default" data-toggle="modal" id="submit">SUBMIT</button>
+
+        </form>
+
+    </div><br><br>
+
+    <br>
+    <footer class="footer">
+        <div class="container">
+            <p>
+                Dummy Footer
+            </p>
+        </div>
+    </footer>
+
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $("#first_q").val(""); $("#second_q").val(""); $("#third_q").val(""); $("#fourth_q").val(""); $("#tenth_q").val("");
+
+
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+
+        var sitterAnswers = {
+            full_name: $("#first_q").val().trim(),
+            city: $("#third_q").val().trim(),
+            email: $("#second_q").val().trim(),
+            years_of_experience: $("#fourth_q").val().trim(),
+            would_sit_dog: $("[name=dog]:checked").val().trim(),
+            would_sit_cat: $("[name=cat]:checked").val().trim(),
+            would_sit_bird: $("[name=bird]:checked").val().trim(),
+            would_sit_snake: $("[name=snake]:checked").val().trim(),
+            additional_comments: $("#tenth_q").val().trim(),
+        };
+
+        $.post("/api/newsitterinformation", sitterAnswers)
+           .then(function(data) {
+            console.log("More");
+           });
+
+        $("#first_q").val(""); $("#second_q").val(""); $("#third_q").val(""); $("#fourth_q").val(""); $("#tenth_q").val("");
+
+    });
+
+</script>
